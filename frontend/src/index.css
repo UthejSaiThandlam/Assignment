@@ -31,6 +31,7 @@
   --text-muted: #64748b;
 
   /* Brand Accents */
+  --primary: #6C63FF;
   --accent-primary: #6C63FF;
   --accent-primary-hover: #584feb;
   --accent-glow: rgba(108, 99, 255, 0.15);
@@ -88,6 +89,7 @@
   --text-secondary: #A5B4CC;
   --text-muted: #64748B;
 
+  --primary: #6C63FF;
   --accent-primary: #6C63FF;
   --accent-primary-hover: #584feb;
   --accent-glow: rgba(108, 99, 255, 0.25);
@@ -609,15 +611,15 @@ html, body {
   width: 30px;
   height: 30px;
   border-radius: 50% !important;
-  background: linear-gradient(135deg, var(--primary) 0%, #a855f7 100%) !important;
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.9rem;
+  background: linear-gradient(135deg, #6C63FF 0%, #a855f7 100%) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 0.88rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(108, 99, 255, 0.35);
+  box-shadow: 0 2px 8px rgba(108, 99, 255, 0.4);
 }
 
 .topbar-user-info {
@@ -720,7 +722,7 @@ html, body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary) 0%, #a855f7 100%);
+  background: linear-gradient(135deg, #6C63FF 0%, #a855f7 100%);
   color: #ffffff;
   font-size: 17px;
   font-weight: 700;
