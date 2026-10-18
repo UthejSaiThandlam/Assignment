@@ -14,6 +14,7 @@ import {
   Activity
 } from 'lucide-react';
 import FaqSection from './FaqSection';
+import { API_BASE } from '../api';
 
 export default function SettingsView({ currentUser, onSaveSettings }) {
   const [activeSubTab, setActiveSubTab] = useState('account');
@@ -236,7 +237,7 @@ export default function SettingsView({ currentUser, onSaveSettings }) {
                 </div>
                 <div className="status-item">
                   <span className="status-label">API Root</span>
-                  <span className="status-val text-purple">http://127.0.0.1:8000/api/</span>
+                  <span className="status-val text-purple">{`${API_BASE}/`}</span>
                 </div>
                 <div className="status-item">
                   <span className="status-label">Frontend Framework</span>

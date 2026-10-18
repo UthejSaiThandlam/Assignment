@@ -35,11 +35,27 @@ class LoginView(APIView):
         if not password:
             return Response({'error': 'Password is required'}, status=status.HTTP_400_BAD_REQUEST)
         
-        # Get or create auth user for JWT token generation
-        user, _ = User.objects.get_or_create(username=username)
-        if not user.email:
-            user.email = f"{username}@talentflow.io"
-            user.save()
+        # Secure credential validation with Django's authentication system
+        user = User.objects.filter(username=username).first()
+        if user is None:
+            # Create user on first login so demo recruiters can sign in smoothly
+            user = User.objects.create_user(
+                username=username,
+                email=f"{username}@talentflow.io",
+                password=password
+            )
+        else:
+            # If user already exists, verify submitted password securely
+            if not user.check_password(password):
+                # Handle legacy demo user without password set
+                if not user.has_usable_password():
+                    user.set_password(password)
+                    user.save()
+                else:
+                    return Response(
+                        {'error': 'Invalid recruiter credentials. Please check your username and password.'},
+                        status=status.HTTP_401_UNAUTHORIZED
+                    )
 
         refresh = RefreshToken.for_user(user)
         access_token = str(refresh.access_token)
