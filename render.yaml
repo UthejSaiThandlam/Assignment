@@ -3,8 +3,8 @@ databases:
   - name: talentflow-db
     databaseName: talentflow
     user: talentflow_user
-    plan: free
     region: oregon
+    plan: free
 
 services:
   # Django REST API Backend
