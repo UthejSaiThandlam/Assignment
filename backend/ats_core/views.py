@@ -1,28 +1,29 @@
 import random
-from rest_framework import viewsets, status, filters
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from django_filters.rest_framework import DjangoFilterBackend
+
+from django.contrib.auth.models import User
 from django.db import transaction
 from django.db.models import Count, Q
-from .models import Job, Candidate, StageHistory, CandidateNote
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.throttling import AnonRateThrottle
+from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken
+
+from .models import Candidate, CandidateNote, Job, StageHistory
 from .serializers import (
-    JobSerializer,
-    CandidateSerializer,
-    StageHistorySerializer,
     CandidateNoteSerializer,
-    StageUpdateSerializer
+    CandidateSerializer,
+    JobSerializer,
+    StageHistorySerializer,
+    StageUpdateSerializer,
 )
 
-from rest_framework.throttling import AnonRateThrottle
 
 class LoginThrottle(AnonRateThrottle):
     rate = '15/minute'
     scope = 'login'
-
-from django.contrib.auth.models import User
-from rest_framework_simplejwt.tokens import RefreshToken
 
 class LoginView(APIView):
     throttle_classes = [LoginThrottle]
