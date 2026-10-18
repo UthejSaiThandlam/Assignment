@@ -4,7 +4,6 @@ databases:
     databaseName: talentflow
     user: talentflow_user
     region: oregon
-    plan: free
 
 services:
   # Django REST API Backend
