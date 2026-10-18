@@ -269,4 +269,15 @@ class Command(BaseCommand):
                 content=f"Initial assessment completed for {candidate.full_name}. Profile fits team requirements."
             )
 
+        # Ensure demo recruiter user exists with password123
+        from django.contrib.auth.models import User
+        if not User.objects.filter(username='admin').exists():
+            User.objects.create_superuser('admin', 'admin@talentflow.io', 'password123')
+            self.stdout.write(self.style.SUCCESS("Created demo admin user (admin / password123)"))
+        else:
+            admin_user = User.objects.get(username='admin')
+            admin_user.set_password('password123')
+            admin_user.save()
+            self.stdout.write(self.style.SUCCESS("Verified demo admin user credentials (admin / password123)"))
+
         self.stdout.write(self.style.SUCCESS(f"Successfully seeded {len(candidates_data)} candidates with stage histories and notes!"))
