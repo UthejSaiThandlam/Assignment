@@ -2,7 +2,6 @@ databases:
   - name: talentflow-db
     databaseName: talentflow
     user: talentflow_user
-    region: oregon
     plan: free
 
 services:
