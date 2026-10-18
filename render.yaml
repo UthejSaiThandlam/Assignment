@@ -1,12 +1,5 @@
-
-databases:
-  - name: talentflow-db
-    databaseName: talentflow
-    user: talentflow_user
-    region: oregon
-
 services:
-  # Django REST API Backend
+  # 1. Django REST API Backend Web Service (uses SQLite)
   - type: web
     name: talentflow-api
     runtime: python
@@ -20,19 +13,16 @@ services:
         value: "False"
       - key: DJANGO_SECRET_KEY
         generateValue: true
-      - key: DATABASE_URL
-        fromDatabase:
-          name: talentflow-db
-          property: connectionString
       - key: ALLOWED_HOSTS
         value: talentflow-api.onrender.com,.onrender.com,localhost,127.0.0.1
       - key: CORS_ALLOWED_ORIGINS
         value: https://talentflow-ats.onrender.com,http://localhost:5173
 
-  # React Vite Frontend Static Site
+  # 2. React Vite Frontend Static Site
   - type: web
     name: talentflow-ats
     runtime: static
+    region: oregon
     plan: free
     rootDir: frontend
     buildCommand: npm install && npm run build
